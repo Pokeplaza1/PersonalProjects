@@ -34,8 +34,12 @@ int main() {
     numMap[90] = "Ninety";
     numMap[100] = "Hundred";
     numMap[1000] = "Thousand";
+    numMap[10000] = "Ten Thousand";
     numMap[100000] = "Hundred Thousand";
     numMap[1000000] = "Million";
+    numMap[10000000] = "Ten Million";
+    numMap[100000000] = "Hundred Million";
+    numMap[1000000000] = "Billion";
     
     int number;
     string result = "";
@@ -50,6 +54,22 @@ int main() {
         cout << "In words: Zero" << endl;
         return 0;
     }
+    if (number < 0) {
+        result += "Negative ";
+        number = -number;
+    }
+    if (number >= 1000000000) {
+        result += numMap[number / 1000000000] + " " + numMap[1000000000] + " ";
+        number %= 1000000000;
+    }
+    if (number >= 100000000) {
+        result += numMap[number / 100000000] + " " + numMap[100000000] + " ";
+        number %= 100000000;
+    }
+    if (number >= 10000000) {
+        result += numMap[number / 10000000] + " " + numMap[10000000] + " ";
+        number %= 10000000;
+    }
     if (number >= 1000000) {
         result += numMap[number / 1000000] + " " + numMap[1000000] + " ";
         number %= 1000000;
@@ -57,6 +77,10 @@ int main() {
     if (number >= 100000) {
         result += numMap[number / 100000] + " " + numMap[100000] + " ";
         number %= 100000;
+    }
+    if (number >= 10000) {
+        result += numMap[number / 10000] + " " + numMap[10000] + " ";
+        number %= 10000;
     }
     if (number >= 1000) {
         result += numMap[number / 1000] + " " + numMap[1000] + " ";
