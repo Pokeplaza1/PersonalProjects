@@ -116,6 +116,10 @@ int main() {
     if (number > 0) {
         hundreds += numMap[number] + " ";
     }
-    cout << "In words: " << millions << thousands << hundreds << endl;
+    //Adding hundreds part if exists
+    if (!hundreds.empty()) {
+        result += hundreds;
+    }
+    cout << "In words: " << result << endl;
     return 0;
 }
