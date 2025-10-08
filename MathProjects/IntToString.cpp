@@ -42,8 +42,9 @@ int main() {
     numMap[1000000000] = "Billion";
     string num_string;
     int number;
+    string millions, thousands, hundreds = "";
     string result = "";
-    cout << "Enter a number (1-999999): ";
+    cout << "Enter a number (1-99999999): ";
     cin >> num_string;
     if (num_string.size() < 10) {
         number = stoi(num_string);
@@ -64,53 +65,60 @@ int main() {
         result += "Negative ";
         number = -number;
     }
-    //Billions
-    if (number >= 1000000000) {
-        result += numMap[number / 1000000000] + " " + numMap[1000000000] + " ";
-        number %= 1000000000;
-    }
     //Hundred Millions
     if (number >= 100000000) {
-        result += numMap[number / 100000000] + " " + numMap[100] + " ";
+        millions += numMap[number / 100000000] + " " + numMap[100] + " ";
         number %= 100000000;
     }
     //Ten Millions
     if (number >= 10000000) {
-        result += numMap[number / 10000000 * 10] + " ";
+        millions += numMap[number / 10000000 * 10] + " ";
         number %= 10000000;
     }
     //Millions
     if (number >= 1000000) {
-        result += numMap[number / 1000000] + " " + numMap[1000000] + " ";
+        result += numMap[number / 1000000] + " ";
         number %= 1000000;
+    }
+    //Adding millions part if exists
+    if (!millions.empty()) {
+        result += millions + numMap[1000000] + " ";
     }
     //Hundred Thousands
     if (number >= 100000) {
-        result += numMap[number / 100000] + " " + numMap[100] + " ";
+        thousands += numMap[number / 100000] + " " + numMap[100] + " ";
         number %= 100000;
     }
     //Ten Thousands
     if (number >= 10000) {
-        result += numMap[number / 10000 * 10] + " ";
+        thousands += numMap[number / 10000 * 10] + " ";
         number %= 10000;
     }
     //Thousands
     if (number >= 1000) {
-        result += numMap[number / 1000] + " " + numMap[1000] + " ";
+        result += numMap[number / 1000] + " " ;
         number %= 1000;
+    }
+    //Adding thousands part if exists
+    if (!thousands.empty()) {
+        result += thousands + numMap[1000] + " ";
     }
     //Hundreds
     if (number >= 100) {
-        result += numMap[number / 100] + " " + numMap[100] + " ";
+        hundreds += numMap[number / 100] + " " + numMap[100] + " ";
         number %= 100; 
     }
     //Tens and Units
     if (number >= 20) {
-        result += numMap[(number / 10) * 10] + " ";
+        hundreds += numMap[(number / 10) * 10] + " ";
         number %= 10;
     }
     if (number > 0) {
-        result += numMap[number] + " ";
+        hundreds += numMap[number] + " ";
+    }
+    //Adding hundreds part if exists
+    if (!hundreds.empty()) {
+        result += hundreds;
     }
     cout << "In words: " << result << endl;
     return 0;
